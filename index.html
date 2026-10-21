@@ -300,8 +300,8 @@ function message(){
   var l=["Bonjour ACHBÉ Collection, je souhaite commander :"];
   
 cart.forEach(function(i){
-  var p = PRODUCTS.find(function(x){ return x.id === i.id; });
-  var prix = p && p.price ? p.price : "";
+  var p = PRODUCTS.find(function(x){ return x.id === i.id || x.name === i.name; });
+  var prix = p && p.price ? String(p.price).trim() : "";
   l.push("* "+i.name+" · taille "+i.size+" × "+i.q+" · "+(prix ? "prix : "+prix+" DH" : "prix à confirmer"));
 });
 
