@@ -306,15 +306,22 @@ function renderCart(){
   $("#send").style.opacity = cart.length?1:.45;
 }
 function message(){
-  var l=["Bonjour ACHBÉ Collection, je souhaite commander :"];
+  var l=["Bonjour ACHBÉ Collection 🤍", "Je souhaite commander l’article suivant :"];
+  var hasPendingPrice = false;
   cart.forEach(function(i){
     var p = PRODUCTS.find(function(x){return x.id===i.id;});
     var price = p && p.price !== undefined && p.price !== null ? String(p.price).trim() : "";
-    var priceText = price ? price+" DH" : "Prix à confirmer";
-    l.push("• "+i.name+" · taille "+i.size+" × "+i.q+" · "+priceText);
+    var priceText = price ? price+" DH" : "À confirmer";
+    if(!price) hasPendingPrice = true;
+    l.push("", "🛍️ Article : "+i.name, "📏 Taille : "+i.size, "🔢 Quantité : "+i.q, "💰 Prix : "+priceText);
   });
   var n=$("#fName").value.trim(), t=$("#fPhone").value.trim(), c=$("#fCity").value.trim(), o=$("#fNote").value.trim();
-  l.push("", "Merci de confirmer la disponibilité et les frais/délais de livraison avant validation. Les prix indiqués comme « Prix à confirmer » seront confirmés par la boutique."); if(n) l.push("Nom : "+n); if(t) l.push("Téléphone : "+t); if(c) l.push("Ville : "+c); if(o) l.push("Précisions : "+o);
+  if(hasPendingPrice){
+    l.push("", "Merci de me confirmer le prix, la disponibilité de l’article ainsi que les frais et délais de livraison avant la validation de ma commande.");
+  } else {
+    l.push("", "Merci de me confirmer la disponibilité de l’article ainsi que les frais et délais de livraison avant la validation de ma commande.");
+  }
+  if(n) l.push("", "👤 Nom : "+n); if(t) l.push("📞 Téléphone : "+t); if(c) l.push("📍 Ville : "+c); if(o) l.push("Précisions : "+o);
   return l.join("\n");
 }
 function openCart(){ $("#cartRoot").hidden=false; renderCart(); document.body.style.overflow="hidden" }
