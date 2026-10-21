@@ -27,7 +27,7 @@ function renderProducts(){
       <div class="pname">${escapeHtml(p.name)}</div>
       <div class="meta">${escapeHtml(p.category)} · Tailles ${escapeHtml(p.sizes.join(", "))}</div>
       <div class="price">${p.price>0 ? money(p.price) : "Prix à confirmer"}</div>
-      <button type="button" onclick="showDetails(${p.id})">Voir les photos et détails</button><button type="button" class="detailbtn" onclick="chooseProduct(${p.id})">Commander ce modèle</button>
+      <button type="button" onclick="showDetails(${p.id})">Voir les photos et détails</button><button type="button" class="detailbtn" onclick="chooseProduct(${p.id})">Ajouter au panier</button>
     </article>`).join("");
 }
 function showDetails(id){
@@ -41,7 +41,7 @@ function showDetails(id){
     <p class="detail-desc">${escapeHtml(p.description||"")}</p>
     <p><strong>${p.price>0?money(p.price):"Prix à confirmer"}</strong></p>
     <p class="hint">Tailles disponibles : ${escapeHtml(p.sizes.join(", "))} · Couleur : ${escapeHtml(p.colors.join(", "))}</p>
-    <button class="btn" style="width:100%" onclick="closeDetails();chooseProduct(${p.id})">Ajouter au panier / Commander</button>`;
+    <button class="btn" style="width:100%" onclick="closeDetails();chooseProduct(${p.id})">Ajouter au panier</button>`;
   document.getElementById("detailModal").classList.add("open");
 }
 function closeDetails(){document.getElementById("detailModal").classList.remove("open");}
@@ -59,7 +59,9 @@ function chooseProduct(id){
   const color=selectedProduct.colors[0]||"À confirmer";
   cart.push({...selectedProduct, size, color, qty:1});
   updateCart();
-  openCart();
+  // Garder la boutique ouverte pour permettre d’ajouter plusieurs modèles.
+  const count=document.getElementById("count");
+  if(count) count.title="Article ajouté au panier";
 }
 function updateCart(){
   document.getElementById("count").textContent=cart.reduce((n,p)=>n+p.qty,0);
