@@ -66,6 +66,8 @@ section{padding-block:clamp(56px,8vw,112px)}
 .card .ph{aspect-ratio:3/4;background:var(--iv2);overflow:hidden;margin-bottom:12px}
 .card h3{color:var(--ol)}
 .card .ph img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .8s ease}
+.card .ph.image-missing{display:grid;place-items:center;position:relative;background:linear-gradient(145deg,#f5efe6,#e8ddcd)}
+.card .ph.image-missing:after{content:attr(data-fallback);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#88745f;text-align:center;padding:18px}
 .card:hover .ph img{transform:scale(1.035)}
 .card .cat{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:var(--sand)}
 .card h3{font-size:25px;font-weight:400}
@@ -277,9 +279,9 @@ function renderChips(){
 }
 function productCard(p){
   var sel = picked[p.id]||"";
-  return '<article class="card"><div class="ph"><img src="'+p.img+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\'"></div>'+
+  return '<article class="card"><div class="ph"><img src="'+p.img+'" alt="'+esc(p.name)+'" loading="lazy" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'image-missing\');this.parentElement.setAttribute(\'data-fallback\',\'Photo bientôt disponible\')"></div>'+
     '<span class="cat">'+esc(p.cat)+'</span>'+(p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'')+'<h3>'+esc(p.name)+'</h3>'+
-    (p.price && String(p.price).trim()!==''?'<div class="price">'+esc(p.price)+' DH</div>':'<div class="price pending">Prix à confirmer sur WhatsApp</div>')+
+    (p.price && String(p.price).trim()!==''?'<div class="price">'+esc(p.price)+' DH</div>':'<div class="price pending">Prix à confirmer</div>')+
     '<div class="sizes" role="group" aria-label="Choisir une taille pour '+esc(p.name)+'">'+SIZES.map(function(s){var sold=!!((p.soldOut&&p.soldOut.indexOf(s)>=0)||(p.sizes&&p.sizes.indexOf(s)<0)); return '<button class="'+(sold?'sold-out':'')+'" '+(sold?'disabled aria-disabled="true" title="Épuisé"':'data-p="'+p.id+'" data-s="'+s+'"')+' aria-pressed="'+(!sold&&sel===s)+'">'+s+'</button>'}).join("")+'</div>'+
     '<button class="link add" data-add="'+p.id+'">Ajouter au panier</button></article>';
 }
