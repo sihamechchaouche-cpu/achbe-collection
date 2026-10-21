@@ -3,7 +3,7 @@
 const WHATSAPP_NUMBER = "212611891048"; // format international sans + ni espaces
 
 const products = [
-  {id:1,name:"Tailleur gris",category:"Ensembles",price:1500,sizes:["XS","S","M","L","XL","XXL"],colors:["Gris"],image:"tailleur-gris.jpg",description:"Blazer structuré et pantalon large"},
+  {id:1,name:"Tailleur gris",category:"Ensembles",price:1500,sizes:["XS","S","M","L","XL","XXL"],colors:["Gris"],image:"tailleur-gris[1].jpg",description:"Blazer structuré et pantalon large"},
   {id:2,name:"Ensemble chic",category:"Ensembles",price:0,sizes:["S","M","L","XL"],colors:["Noir","Crème"],image:"",description:"Modèle de démonstration"},
   {id:3,name:"Blouse classique",category:"Hauts",price:0,sizes:["S","M","L","XL"],colors:["Blanc","Noir"],image:"",description:"Modèle de démonstration"},
   {id:4,name:"Pantalon moderne",category:"Pantalons",price:0,sizes:["S","M","L","XL"],colors:["Noir","Beige"],image:"",description:"Modèle de démonstration"},
