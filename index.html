@@ -158,7 +158,7 @@ form input:focus,form textarea:focus{border-color:var(--ol);outline:none}
 <div class="top full">Prêt-à-porter féminin · Sélectionné en France</div>
 <div class="stick full in"><div class="wrap">
 <header class="nav">
-  <nav class="links" aria-label="Navigation"><a href="#collection">Collection</a><a href="#boutique">Boutique</a><a href="#contact">Contact</a></nav>
+  <nav class="links" aria-label="Navigation"><a href="#collection">Nouvelle collection</a><a href="#store-collection">En magasin</a><a href="#boutique">Boutique</a><a href="#contact">Contact</a></nav>
   <a class="logo" href="#top" aria-label="ACHBÉ"><svg viewBox="0 0 70 62" aria-hidden="true"><path d="M4 60 L35 4 L66 60" fill="none" stroke="currentColor" stroke-width="5"/></svg>CHBÉ</a>
   <button class="cartbtn" id="openCart" aria-label="Ouvrir le panier">Panier<b id="count">0</b></button>
 </header>
@@ -180,6 +180,10 @@ form input:focus,form textarea:focus{border-color:var(--ol);outline:none}
   <div class="tabs" id="chips" role="group" aria-label="Filtrer par catégorie"></div>
   <div class="center" style="margin:30px 0 18px"><span class="eyebrow">Automne · Hiver 2026</span><h2 style="margin-top:12px">Nouvelle <em>Collection</em></h2><p>Le Trench · Le Tailleur · Le Bomber · Le Jean</p></div><div class="grid" id="grid"></div>
   <p class="note">Les prix et la disponibilité sont confirmés par WhatsApp avant la validation de votre commande.</p>
+</section><section id="store-collection">
+  <div class="center"><span class="eyebrow">À retrouver en boutique</span><h2 style="margin-top:16px">Collection <em>disponible en magasin</em></h2><p>Découvrez les autres pièces disponibles chez ACHBÉ Collection. Choisissez votre taille pour préparer votre commande.</p></div>
+  <div class="tabs" id="chips" role="group" aria-label="Filtrer par catégorie"></div>
+  <div class="grid" id="storeGrid"></div>
 </section></div>
 
 <div class="rappel full"><div class="in"><div class="wrap"><section class="center">
@@ -271,17 +275,24 @@ var $ = function(s){return document.querySelector(s)};
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 
 function renderChips(){
-  var cats=["Tout"]; PRODUCTS.forEach(function(p){ if(cats.indexOf(p.cat)<0) cats.push(p.cat) });
+  var cats=["Tout"];
+  PRODUCTS.filter(function(p){return p.cat!=="Nouvelle Collection"}).forEach(function(p){ if(cats.indexOf(p.cat)<0) cats.push(p.cat) });
   $("#chips").innerHTML = cats.map(function(c){return '<button class="chip" data-c="'+esc(c)+'" aria-pressed="'+(c===filter)+'">'+esc(c)+'</button>'}).join("");
 }
+function productCard(p){
+  var sel = picked[p.id]||"";
+  var price = String(p.price == null ? "" : p.price).trim();
+  var priceHtml = '<div class="price">'+esc(price || "0")+' DH</div>';
+  return '<article class="card"><div class="ph"><img src="'+p.img+'" alt="'+esc(p.name)+'" loading="lazy"></div>'+ 
+    '<span class="cat">'+esc(p.cat)+'</span>'+(p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'')+'<h3>'+esc(p.name)+'</h3>'+priceHtml+
+    '<div class="sizes" role="group" aria-label="Choisir une taille pour '+esc(p.name)+'">'+(function(){var all=SIZES; return all.map(function(s){var sold=!!((p.soldOut&&p.soldOut.indexOf(s)>=0)||(p.sizes&&p.sizes.indexOf(s)<0)); return '<button class="'+(sold?'sold-out':'')+'" '+(sold?'disabled aria-disabled="true" title="Épuisé"':'data-p="'+p.id+'" data-s="'+s+'"')+' aria-pressed="'+(!sold&&sel===s)+'">'+s+'</button>'}).join("")})()+'</div>'+ 
+    '<button class="link add" data-add="'+p.id+'">Ajouter au panier</button></article>';
+}
 function renderGrid(){
-  $("#grid").innerHTML = PRODUCTS.filter(function(p){return filter==="Tout"||p.cat===filter}).map(function(p){
-    var sel = picked[p.id]||"";
-    return '<article class="card"><div class="ph"><img src="'+p.img+'" alt="'+esc(p.name)+'" loading="lazy"></div>'+
-      '<span class="cat">'+esc(p.cat)+'</span>'+(p.tag?'<span class="tag">'+esc(p.tag)+'</span>':'')+'<h3>'+esc(p.name)+'</h3>'+(p.price?'<div class="price">'+esc(p.price)+'</div>':'<div class="price pending">Prix à confirmer sur WhatsApp</div>')+
-      '<div class="sizes" role="group" aria-label="Choisir une taille pour '+esc(p.name)+'">'+(function(){var all=SIZES; return all.map(function(s){var sold=!!((p.soldOut&&p.soldOut.indexOf(s)>=0)||(p.sizes&&p.sizes.indexOf(s)<0)); return '<button class="'+(sold?'sold-out':'')+'" '+(sold?'disabled aria-disabled="true" title="Épuisé"':'data-p="'+p.id+'" data-s="'+s+'"')+' aria-pressed="'+(!sold&&sel===s)+'">'+s+'</button>'}).join("")})()+'</div>'+
-      '<button class="link add" data-add="'+p.id+'">Ajouter au panier</button></article>';
-  }).join("");
+  var fresh=PRODUCTS.filter(function(p){return p.cat==="Nouvelle Collection"});
+  var store=PRODUCTS.filter(function(p){return p.cat!=="Nouvelle Collection" && (filter==="Tout"||p.cat===filter)});
+  $("#newGrid").innerHTML=fresh.map(productCard).join("");
+  $("#storeGrid").innerHTML=store.map(productCard).join("");
 }
 function count(){ var n=cart.reduce(function(a,i){return a+i.q},0); $("#count").textContent=n; return n }
 function renderCart(){
@@ -302,7 +313,7 @@ function message(){
 cart.forEach(function(i){
   var p = PRODUCTS.find(function(x){ return x.id === i.id || x.name === i.name; });
   var prix = p && p.price ? String(p.price).trim() : "";
-  l.push("* "+i.name+" · taille "+i.size+" × "+i.q+" · "+(prix ? "prix : "+prix+" DH" : "prix à confirmer"));
+  l.push("* "+i.name+" · taille "+i.size+" × "+i.q+" · prix : "+(prix || "0")+" DH");
 });
 
   var n=$("#fName").value.trim(), t=$("#fPhone").value.trim(), c=$("#fCity").value.trim(), o=$("#fNote").value.trim();
