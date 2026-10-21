@@ -298,7 +298,13 @@ function renderCart(){
 }
 function message(){
   var l=["Bonjour ACHBÉ Collection, je souhaite commander :"];
-  cart.forEach(function(i){ l.push("• "+i.name+" · taille "+i.size+" × "+i.q+" · prix à confirmer") });
+  
+cart.forEach(function(i){
+  var p = PRODUCTS.find(function(x){ return x.id === i.id; });
+  var prix = p && p.price ? p.price : "";
+  l.push("* "+i.name+" · taille "+i.size+" × "+i.q+" · "+(prix ? "prix : "+prix+" DH" : "prix à confirmer"));
+});
+
   var n=$("#fName").value.trim(), t=$("#fPhone").value.trim(), c=$("#fCity").value.trim(), o=$("#fNote").value.trim();
   l.push("", "Merci de confirmer le prix, la disponibilité et les frais/délais de livraison avant validation."); if(n) l.push("Nom : "+n); if(t) l.push("Téléphone : "+t); if(c) l.push("Ville : "+c); if(o) l.push("Précisions : "+o);
   return l.join("\n");
