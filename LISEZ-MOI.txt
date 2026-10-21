@@ -1,0 +1,5 @@
+ACHBÉ Collection — IMPORTANT
+
+Pour afficher toutes les photos, extrayez TOUT le contenu du ZIP dans un même dossier. Ne déplacez pas index.html séparément du dossier images. Ensuite ouvrez index.html.
+
+Le dossier images doit rester à côté de index.html.
