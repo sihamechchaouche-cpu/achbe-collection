@@ -3,8 +3,8 @@
 const WHATSAPP_NUMBER = "212611891048"; // format international sans + ni espaces
 
 const products = [
-  {id:1,name:"Tailleur gris",category:"Ensembles",price:1500,sizes:["XS","S","M","L","XL","XXL"],colors:["Gris"],image:"tailleur-gris[1].jpg",description:"Blazer structuré et pantalon large"},
-  {id:2,name:"Ensemble chic",category:"Ensembles",price:0,sizes:["S","M","L","XL"],colors:["Noir","Crème"],image:"",description:"Modèle de démonstration"},
+  {id:1,name:"Tailleur gris",category:"Ensembles",price:0,sizes:["XS","S","M","L","XL","XXL"],colors:["Gris"],image:"tailleur-gris.jpg",description:"Blazer structuré et pantalon large"},
+  {id:2,name:"Chemise marron",category:"Hauts",price:500,sizes:["XS","S","M","L","XL","XXL"],colors:["Marron"],image:"chemise-marron.jpg",images:["chemise-marron.jpg","chemise-marron-2.jpg"],description:"Chemise marron élégante à manches longues. Coupe fluide, col classique et poignets boutonnés. Prix : 500 DH."},
   {id:3,name:"Blouse classique",category:"Hauts",price:0,sizes:["S","M","L","XL"],colors:["Blanc","Noir"],image:"",description:"Modèle de démonstration"},
   {id:4,name:"Pantalon moderne",category:"Pantalons",price:0,sizes:["S","M","L","XL"],colors:["Noir","Beige"],image:"",description:"Modèle de démonstration"},
   {id:5,name:"Robe quotidienne",category:"Robes",price:0,sizes:["S","M","L"],colors:["Bleu","Noir"],image:"",description:"Modèle de démonstration"},
@@ -27,9 +27,25 @@ function renderProducts(){
       <div class="pname">${escapeHtml(p.name)}</div>
       <div class="meta">${escapeHtml(p.category)} · Tailles ${escapeHtml(p.sizes.join(", "))}</div>
       <div class="price">${p.price>0 ? money(p.price) : "Prix à confirmer"}</div>
-      <button type="button" onclick="chooseProduct(${p.id})">Choisir ce modèle</button>
+      <button type="button" onclick="showDetails(${p.id})">Voir les photos et détails</button><button type="button" class="detailbtn" onclick="chooseProduct(${p.id})">Commander ce modèle</button>
     </article>`).join("");
 }
+function showDetails(id){
+  const p=products.find(item=>item.id===id);
+  if(!p)return;
+  const pics=(p.images&&p.images.length?p.images:(p.image?[p.image]:[]));
+  document.getElementById("detailContent").innerHTML=`
+    <div class="eyebrow">${escapeHtml(p.category)}</div>
+    <h3>${escapeHtml(p.name)}</h3>
+    <div class="gallery-grid">${pics.map(src=>`<img src="${escapeAttr(src)}" alt="${escapeAttr(p.name)}">`).join("")}</div>
+    <p class="detail-desc">${escapeHtml(p.description||"")}</p>
+    <p><strong>${p.price>0?money(p.price):"Prix à confirmer"}</strong></p>
+    <p class="hint">Tailles disponibles : ${escapeHtml(p.sizes.join(", "))} · Couleur : ${escapeHtml(p.colors.join(", "))}</p>
+    <button class="btn" style="width:100%" onclick="closeDetails();chooseProduct(${p.id})">Ajouter au panier / Commander</button>`;
+  document.getElementById("detailModal").classList.add("open");
+}
+function closeDetails(){document.getElementById("detailModal").classList.remove("open");}
+function detailBackdrop(e){if(e.target.id==="detailModal")closeDetails();}
 function filter(category,button){
   activeCategory=category;
   document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));

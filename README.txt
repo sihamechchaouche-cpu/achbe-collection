@@ -24,3 +24,11 @@ UTILISATION
 
 
 Mise à jour : le visuel promotionnel tailleur gris est utilisé dans la bannière d’accueil, et la photo tailleur-gris.jpg est liée au produit Tailleur gris. Le prix reste à confirmer (0 dans le code).
+
+
+Mise à jour Chemise marron:
+- Le visuel principal utilise chemise-marron-poster.jpg.
+- Le produit Chemise marron utilise chemise-marron.jpg.
+- Une deuxième photo est incluse: chemise-marron-2.jpg.
+- Le prix est laissé à 0 (Prix à confirmer) en attendant votre prix réel.
+\n\nMise à jour nouvelle collection :\n- Le visuel principal est nouvelle-collection.jpg.\n- La Chemise marron est au prix de 500 DH.\n- Le bouton « Voir les photos et détails » ouvre une galerie avec deux photos et la description.\n- Photos produit : chemise-marron.jpg et chemise-marron-2.jpg.\n
