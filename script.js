@@ -52,16 +52,29 @@ function filter(category,button){
   if(button) button.classList.add("active");
   renderProducts();
 }
-function chooseProduct(id){
-  selectedProduct=products.find(p=>p.id===id);
-  if(!selectedProduct)return;
-  const size=selectedProduct.sizes[0]||"À confirmer";
-  const color=selectedProduct.colors[0]||"À confirmer";
-  cart.push({...selectedProduct, size, color, qty:1});
+function chooseProduct(id) {
+  selectedProduct = products.find(p => p.id === id);
+  if (!selectedProduct) return;
+
+  const size = selectedProduct.sizes[0] || "À confirmer";
+  const color = selectedProduct.colors[0] || "À confirmer";
+
+  cart.push({
+    ...selectedProduct,
+    size,
+    color,
+    qty: 1
+  });
+
   updateCart();
-  // Garder la boutique ouverte pour permettre d’ajouter plusieurs modèles.
-  const count=document.getElementById("count");
-  if(count) count.title="Article ajouté au panier";
+
+  const count = document.getElementById("count");
+  if (count) {
+    count.title = "Article ajouté au panier";
+  }
+
+  closeDetails();
+}
 }
 function updateCart(){
   document.getElementById("count").textContent=cart.reduce((n,p)=>n+p.qty,0);
