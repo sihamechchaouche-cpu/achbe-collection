@@ -311,9 +311,15 @@ function message(){
   var l=["Bonjour ACHBÉ Collection, je souhaite commander :"];
   
 cart.forEach(function(i){
-  var p = PRODUCTS.find(function(x){ return x.id === i.id || x.name === i.name; });
-  var prix = p && p.price ? String(p.price).trim() : "";
-  l.push("* "+i.name+" · taille "+i.size+" × "+i.q+" · prix : "+(prix || "0")+" DH");
+ 
+var p = PRODUCTS.find(function(x){
+  return x.id === i.id || x.name === i.name;
+});
+var prix = p && p.price !== undefined && p.price !== null && String(p.price).trim() !== ""
+  ? String(p.price).trim()
+  : "0";
+l.push("• "+i.name+" · taille "+i.size+" × "+i.q+" · prix : "+prix+" DH");
+
 });
 
   var n=$("#fName").value.trim(), t=$("#fPhone").value.trim(), c=$("#fCity").value.trim(), o=$("#fNote").value.trim();
