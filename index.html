@@ -171,7 +171,7 @@ form input:focus,form textarea:focus{border-color:var(--ol);outline:none}
     <p>Des pièces importées de France, choisies une à une. Commandez directement sur WhatsApp ou venez les essayer en boutique.</p>
     <div class="cta"><a class="btn" href="#collection">Découvrir</a><a class="link" href="https://wa.me/212611891048" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
-  <div class="img"><img src="images/nouvelle-collection.jpg" alt="ACHBÉ, nouvelle collection automne-hiver 2026 : tailleur, trench, bomber, jean, chemise" fetchpriority="high"></div>
+  <div class="img"><img src="nouvelle-collection.jpg" alt="ACHBÉ, nouvelle collection automne-hiver 2026 : tailleur, trench, bomber, jean, chemise" fetchpriority="high"></div>
 </div>
 
 <div class="wrap"><section id="collection">
@@ -233,38 +233,38 @@ form input:focus,form textarea:focus{border-color:var(--ol);outline:none}
 </div>
 
 <script>
-/* Pour ajouter un produit: copiez une ligne, changez le nom, la catégorie, l'image (dossier images/) et le prix. price: "" = pas de prix affiché. */
+/* Pour ajouter un produit: copiez une ligne, changez le nom, la catégorie, l'image (dossier ) et le prix. price: "" = pas de prix affiché. */
 var WA = "212611891048";
 var SIZES = ["XS","S","M","L","XL","XXL"];
 var PRODUCTS = [
-  {id:"nouveau-trench", name:"Le Trench beige", cat:"Nouvelle Collection", img:"images/nouveau-trench.jpg", price:"", sizes:SIZES, soldOut:[]},
-  {id:"nouveau-tailleur", name:"Le Tailleur gris", cat:"Nouvelle Collection", img:"images/nouveau-tailleur.jpg", price:"", sizes:SIZES, soldOut:[]},
-  {id:"nouveau-bomber", name:"Le Bomber noir", cat:"Nouvelle Collection", img:"images/nouveau-bomber.jpg", price:"", sizes:SIZES, soldOut:[]},
-  {id:"nouveau-jean", name:"Le Jean large", cat:"Nouvelle Collection", img:"images/nouveau-jean.jpg", price:"", sizes:SIZES, soldOut:[]},
+  {id:"nouveau-trench", name:"Le Trench beige", cat:"Nouvelle Collection", img:"nouveau-trench.jpg", price:"", sizes:SIZES, soldOut:[]},
+  {id:"nouveau-tailleur", name:"Le Tailleur gris", cat:"Nouvelle Collection", img:"nouveau-tailleur.jpg", price:"", sizes:SIZES, soldOut:[]},
+  {id:"nouveau-bomber", name:"Le Bomber noir", cat:"Nouvelle Collection", img:"nouveau-bomber.jpg", price:"", sizes:SIZES, soldOut:[]},
+  {id:"nouveau-jean", name:"Le Jean large", cat:"Nouvelle Collection", img:"nouveau-jean.jpg", price:"", sizes:SIZES, soldOut:[]},
   /* sizes = tailles à afficher pour le modèle. soldOut = tailles épuisées à afficher barrées. tag = mention visible, ex. "Dernière pièce". À mettre à jour selon le stock réel. */
-  {id:"manteau-leopard",       name:"Manteau fausse fourrure léopard",        cat:"Manteaux",  img:"images/manteau-leopard.jpg",       price:"", sizes:SIZES},
-  {id:"blazer-marron",         name:"Blazer marron structuré",                cat:"Vestes",    img:"images/blazer-marron.jpg",         price:"", sizes:SIZES},
-  {id:"gilet-marron",          name:"Gilet côtelé boutons dorés",             cat:"Hauts",     img:"images/gilet-marron.jpg",          price:""},
-  {id:"ensemble-kimono-noir",  name:"Ensemble kimono noir ceinturé",          cat:"Ensembles", img:"images/ensemble-kimono-noir.jpg",  price:""},
-  {id:"ensemble-jaune-tailleur",name:"Ensemble tailleur jaune manches courtes",cat:"Ensembles",img:"images/ensemble-jaune-tailleur.jpg",price:"", sizes:SIZES, tag:"Disponible en S et M"},
-  {id:"ensemble-lin-beige",    name:"Ensemble tailleur lin beige",            cat:"Ensembles", img:"images/ensemble-lin-beige.jpg",    price:"", sizes:SIZES},
-  {id:"ensemble-blanc-boutons",name:"Ensemble blanc fluide boutons dorés",    cat:"Ensembles", img:"images/ensemble-blanc-boutons.jpg",price:""},
-  {id:"ensemble-feuilles",     name:"Ensemble blanc imprimé feuilles",        cat:"Ensembles", img:"images/ensemble-feuilles.jpg",     price:""},
-  {id:"ensemble-coton-jaune",  name:"Ensemble coton jaune oversize",          cat:"Ensembles", img:"images/ensemble-coton-jaune.jpg",  price:"", sizes:SIZES},
-  {id:"ensemble-noir-fourrure",name:"Ensemble noir col fourrure",             cat:"Ensembles", img:"images/ensemble-noir-fourrure.jpg",price:""},
-  {id:"robe-sequins-noire",    name:"Robe longue à sequins noire",            cat:"Robes",     img:"images/robe-sequins-noire.jpg",    price:""},
-  {id:"robe-maille-jaune",     name:"Robe longue maille jaune",               cat:"Robes",     img:"images/robe-maille-jaune.jpg",     price:""},
-  {id:"robe-maille-blanche",   name:"Robe longue maille blanche",             cat:"Robes",     img:"images/robe-maille-blanche.jpg",   price:""},
-  {id:"chemise-blanche",       name:"Chemise blanche oversize",               cat:"Hauts",     img:"images/chemise-blanche.jpg",       price:"", sizes:SIZES, tag:"Reste en M et L"},
-  {id:"jean-noue-delave",      name:"Jean large délavé à nouer",              cat:"Pantalons", img:"images/jean-noue-delave.jpg",      price:"", sizes:SIZES,  tag:"Reste en 36"},
-  {id:"robe-jaune",    name:"Robe longue jaune beurre",  cat:"Robes",     img:"images/robe-jaune.jpg",    price:""},
-  {id:"robe-fleurie",  name:"Robe bleue fleurie",        cat:"Robes",     img:"images/robe-fleurie.jpg",  price:""},
-  {id:"robe-moutarde", name:"Robe moutarde froncée",     cat:"Robes",     img:"images/robe-moutarde.jpg", price:""},
-  {id:"robe-bleue",    name:"Robe bleue ceinturée",      cat:"Robes",     img:"images/robe-bleue.jpg",    price:""},
-  {id:"ensemble-blanc",name:"Ensemble blanc liseré",     cat:"Ensembles", img:"images/ensemble-blanc.jpg",price:""},
-  {id:"ensemble-beige",name:"Ensemble beige",            cat:"Ensembles", img:"images/ensemble-beige.jpg",price:""},
-  {id:"top-rouge",     name:"T-shirt oversize rouge",    cat:"Hauts",     img:"images/top-rouge.jpg",     price:""},
-  {id:"jean-large",    name:"Jean large taille haute",   cat:"Pantalons", img:"images/jean-large.jpg",    price:""}
+  {id:"manteau-leopard",       name:"Manteau fausse fourrure léopard",        cat:"Manteaux",  img:"manteau-leopard.jpg",       price:"", sizes:SIZES},
+  {id:"blazer-marron",         name:"Blazer marron structuré",                cat:"Vestes",    img:"blazer-marron.jpg",         price:"", sizes:SIZES},
+  {id:"gilet-marron",          name:"Gilet côtelé boutons dorés",             cat:"Hauts",     img:"gilet-marron.jpg",          price:""},
+  {id:"ensemble-kimono-noir",  name:"Ensemble kimono noir ceinturé",          cat:"Ensembles", img:"ensemble-kimono-noir.jpg",  price:""},
+  {id:"ensemble-jaune-tailleur",name:"Ensemble tailleur jaune manches courtes",cat:"Ensembles",img:"ensemble-jaune-tailleur.jpg",price:"", sizes:SIZES, tag:"Disponible en S et M"},
+  {id:"ensemble-lin-beige",    name:"Ensemble tailleur lin beige",            cat:"Ensembles", img:"ensemble-lin-beige.jpg",    price:"", sizes:SIZES},
+  {id:"ensemble-blanc-boutons",name:"Ensemble blanc fluide boutons dorés",    cat:"Ensembles", img:"ensemble-blanc-boutons.jpg",price:""},
+  {id:"ensemble-feuilles",     name:"Ensemble blanc imprimé feuilles",        cat:"Ensembles", img:"ensemble-feuilles.jpg",     price:""},
+  {id:"ensemble-coton-jaune",  name:"Ensemble coton jaune oversize",          cat:"Ensembles", img:"ensemble-coton-jaune.jpg",  price:"", sizes:SIZES},
+  {id:"ensemble-noir-fourrure",name:"Ensemble noir col fourrure",             cat:"Ensembles", img:"ensemble-noir-fourrure.jpg",price:""},
+  {id:"robe-sequins-noire",    name:"Robe longue à sequins noire",            cat:"Robes",     img:"robe-sequins-noire.jpg",    price:""},
+  {id:"robe-maille-jaune",     name:"Robe longue maille jaune",               cat:"Robes",     img:"robe-maille-jaune.jpg",     price:""},
+  {id:"robe-maille-blanche",   name:"Robe longue maille blanche",             cat:"Robes",     img:"robe-maille-blanche.jpg",   price:""},
+  {id:"chemise-blanche",       name:"Chemise blanche oversize",               cat:"Hauts",     img:"chemise-blanche.jpg",       price:"", sizes:SIZES, tag:"Reste en M et L"},
+  {id:"jean-noue-delave",      name:"Jean large délavé à nouer",              cat:"Pantalons", img:"jean-noue-delave.jpg",      price:"", sizes:SIZES,  tag:"Reste en 36"},
+  {id:"robe-jaune",    name:"Robe longue jaune beurre",  cat:"Robes",     img:"robe-jaune.jpg",    price:""},
+  {id:"robe-fleurie",  name:"Robe bleue fleurie",        cat:"Robes",     img:"robe-fleurie.jpg",  price:""},
+  {id:"robe-moutarde", name:"Robe moutarde froncée",     cat:"Robes",     img:"robe-moutarde.jpg", price:""},
+  {id:"robe-bleue",    name:"Robe bleue ceinturée",      cat:"Robes",     img:"robe-bleue.jpg",    price:""},
+  {id:"ensemble-blanc",name:"Ensemble blanc liseré",     cat:"Ensembles", img:"ensemble-blanc.jpg",price:""},
+  {id:"ensemble-beige",name:"Ensemble beige",            cat:"Ensembles", img:"ensemble-beige.jpg",price:""},
+  {id:"top-rouge",     name:"T-shirt oversize rouge",    cat:"Hauts",     img:"top-rouge.jpg",     price:""},
+  {id:"jean-large",    name:"Jean large taille haute",   cat:"Pantalons", img:"jean-large.jpg",    price:""}
 ];
 var cart = [], filter = "Tout", picked = {};
 var $ = function(s){return document.querySelector(s)};
