@@ -21,3 +21,6 @@ UTILISATION
 - Le site ouvre WhatsApp avec le message de commande prérempli. La cliente doit appuyer sur Envoyer dans WhatsApp.
 - Les frais de livraison et la disponibilité restent à confirmer avec la boutique.
 - Cette version ne comprend pas encore de vraie base de données ni de tableau de bord administrateur.
+
+
+Mise à jour : le visuel promotionnel tailleur gris est utilisé dans la bannière d’accueil, et la photo tailleur-gris.jpg est liée au produit Tailleur gris. Le prix reste à confirmer (0 dans le code).
