@@ -75,7 +75,7 @@ function chooseProduct(id) {
 
   closeDetails();
 }
-}
+
 function updateCart(){
   document.getElementById("count").textContent=cart.reduce((n,p)=>n+p.qty,0);
   const root=document.getElementById("items");
